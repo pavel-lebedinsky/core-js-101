@@ -353,8 +353,32 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const bracketsConfig = [['[', ']'], ['(', ')'], ['{', '}'], ['<', '>']];
+  const bracketsMap = new Map(bracketsConfig);
+  const openingBrackets = new Set(bracketsMap.keys());
+  const closingBrackets = new Set(bracketsMap.values());
+
+  const stack = [];
+  // eslint-disable-next-line no-restricted-syntax
+  for (const char of str) {
+    if (openingBrackets.has(char)) {
+      const closing = bracketsMap.get(char);
+      if (stack[stack.length - 1] === closing && closing === char) {
+        stack.pop();
+      } else {
+        stack.push(char);
+      }
+    } else if (closingBrackets.has(char)) {
+      if (bracketsMap.get(stack[stack.length - 1]) === char) {
+        stack.pop();
+      } else {
+        stack.push(char);
+      }
+    }
+  }
+
+  return stack.length === 0;
 }
 
 
@@ -378,8 +402,8 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
@@ -395,8 +419,30 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  const maxLength = pathes.reduce((max, path) => Math.max(max, path.length), 0);
+  let result = '';
+  let word = '';
+  for (let i = 0; i < maxLength; i += 1) {
+    const char = pathes[0].charAt(i);
+    let equal = true;
+    for (let j = 1; j < pathes.length; j += 1) {
+      equal = equal && char === pathes[j].charAt(i);
+      if (!equal) break;
+    }
+
+    if (equal) {
+      word = word.concat(char);
+      if (char === '/') {
+        result = result.concat(word);
+        word = '';
+      }
+    } else {
+      break;
+    }
+  }
+
+  return result;
 }
 
 
@@ -453,8 +499,31 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+/* eslint-disable prefer-destructuring */
+function evaluateTicTacToePosition(position) {
+  const b = position;
+  let winner = null;
+
+  if (b[0][0] && b[0][0] === b[1][1] && b[0][0] === b[2][2]) {
+    // eslint-disable-next-line prefer-destructuring
+    winner = b[1][1];
+  } else if (b[0][2] && b[0][2] === b[1][1] && b[0][2] === b[2][0]) {
+    winner = b[1][1];
+  } else {
+    for (let i = 0; i < 3; i += 1) {
+      if (b[i][0] && b[i][0] === b[i][1] && b[i][0] === b[i][2]) {
+        winner = b[i][0];
+        break;
+      }
+
+      if (b[0][i] && b[0][i] === b[1][i] && b[0][i] === b[2][i]) {
+        winner = b[0][i];
+        break;
+      }
+    }
+  }
+
+  return winner;
 }
 
 
