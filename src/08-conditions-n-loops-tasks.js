@@ -325,8 +325,8 @@ function isCreditCardNumber(value) {
 function getDigitalRoot(num) {
   let root = num;
   do {
-    const digits = String(num).split('').map(parseInt);
-    root = digits.reduce((sum, digit) => sum + digit, 0);
+    const digits = String(root).split('');
+    root = digits.reduce((sum, digit) => sum + parseInt(digit, 10), 0);
   } while (root > 9);
   return root;
 }
