@@ -176,7 +176,7 @@ function convertToUpperCase(str) {
  *   'info@gmail.com' => ['info@gmail.com']
  */
 function extractEmails(str) {
-  return str.split(';').map(i => i.trim());
+  return str.split(';').map((i) => i.trim());
 }
 
 /**
@@ -211,7 +211,7 @@ function getRectangleString(width, height) {
     const row = new Array(width).fill(middle);
     row[0] = first;
     row[width - 1] = last;
-    row.push('\n')
+    row.push('\n');
     return row.join('');
   };
 
@@ -245,7 +245,7 @@ function encodeToRot13(str) {
   const input = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
   const output = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
   return str.split('')
-    .map(c => input.indexOf(c) >= 0 ? output.charAt(input.indexOf(c)) : c)
+    .map((c) => (input.indexOf(c) >= 0 ? output.charAt(input.indexOf(c)) : c))
     .join('');
 }
 
@@ -293,10 +293,10 @@ function isString(value) {
  */
 function getCardId(value) {
   const deck = [
-    'A♣','2♣','3♣','4♣','5♣','6♣','7♣','8♣','9♣','10♣','J♣','Q♣','K♣',
-    'A♦','2♦','3♦','4♦','5♦','6♦','7♦','8♦','9♦','10♦','J♦','Q♦','K♦',
-    'A♥','2♥','3♥','4♥','5♥','6♥','7♥','8♥','9♥','10♥','J♥','Q♥','K♥',
-    'A♠','2♠','3♠','4♠','5♠','6♠','7♠','8♠','9♠','10♠','J♠','Q♠','K♠',
+    'A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣',
+    'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦',
+    'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥',
+    'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠',
   ];
 
   return deck.indexOf(value);

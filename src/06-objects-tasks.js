@@ -119,7 +119,7 @@ const cssSelectorBuilder = {
   parts: [],
 
   stringify() {
-    const result = this.parts.map(part => part.stringify()).join('');
+    const result = this.parts.map((part) => part.stringify()).join('');
     this.parts = [];
     return result;
   },
@@ -127,9 +127,7 @@ const cssSelectorBuilder = {
   element(value) {
     this.parts.push({
       value,
-      stringify: () => {
-        return value;
-      },
+      stringify: () => value,
     });
     return this;
   },
@@ -137,9 +135,7 @@ const cssSelectorBuilder = {
   id(value) {
     this.parts.push({
       value,
-      stringify: () => {
-        return `#${value}`;
-      },
+      stringify: () => `#${value}`,
     });
     return this;
   },
@@ -147,9 +143,7 @@ const cssSelectorBuilder = {
   class(value) {
     this.parts.push({
       value,
-      stringify: () => {
-        return `.${value}`;
-      },
+      stringify: () => `.${value}`,
     });
     return this;
   },
@@ -157,9 +151,7 @@ const cssSelectorBuilder = {
   attr(value) {
     this.parts.push({
       value,
-      stringify: () => {
-        return `[${value}]`;
-      },
+      stringify: () => `[${value}]`,
     });
     return this;
   },
@@ -167,9 +159,7 @@ const cssSelectorBuilder = {
   pseudoClass(value) {
     this.parts.push({
       value,
-      stringify: () => {
-        return `:${value}`;
-      },
+      stringify: () => `:${value}`,
     });
     return this;
   },
@@ -177,14 +167,12 @@ const cssSelectorBuilder = {
   pseudoElement(value) {
     this.parts.push({
       value,
-      stringify: () => {
-        return `::${value}`;
-      },
+      stringify: () => `::${value}`,
     });
     return this;
   },
 
-  combine(selector1, combinator, selector2) {
+  combine(/* selector1, combinator, selector2 */) {
     // return `${selector1.stringify()}${combinator}${selector2.stringify()}`;
     throw new Error('Not implemented');
   },

@@ -71,7 +71,7 @@ function getAverage(value1, value2) {
  *   (-5,0) (10,-10) => 18.027756377319946
  */
 function getDistanceBetweenPoints(x1, y1, x2, y2) {
-  return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+  return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2);
 }
 
 /**
@@ -233,7 +233,7 @@ function isPrime(n) {
  */
 function toNumber(value, def) {
   const number = parseFloat(value, 10);
-  return isNaN(number) ? def : number;
+  return Number.isNaN(number) ? def : number;
 }
 
 module.exports = {

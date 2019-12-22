@@ -239,7 +239,10 @@ function toArrayOfSquares(arr) {
  */
 function getMovingSum(arr) {
   let acc = 0;
-  return arr.map((item) => acc += item);
+  return arr.reduce((item) => {
+    acc += item;
+    return acc;
+  });
 }
 
 /**
@@ -274,6 +277,7 @@ function getSecondItems(arr) {
  */
 function propagateItemsByPositionIndex(arr) {
   const result = [];
+  // eslint-disable-next-line array-callback-return
   arr.map((item, index) => {
     result.push(...(new Array(index + 1)).fill(item));
   });
@@ -440,7 +444,11 @@ function toStringList(arr) {
  *    ]
  */
 function sortCitiesArray(arr) {
-  return arr.sort((a, b) => (a.country === b.country ? a.city.localeCompare(b.city) : a.country.localeCompare(b.country)));
+  return arr.sort((a, b) => (
+    a.country === b.country
+      ? a.city.localeCompare(b.city)
+      : a.country.localeCompare(b.country)
+  ));
 }
 
 /**
@@ -535,17 +543,18 @@ function distinct(arr) {
  *   }
  */
 function group(array, keySelector, valueSelector) {
-  const map = array.reduce((map, item) => {
+  const map = array.reduce((dictionary, item) => {
     const key = keySelector(item);
-    if (map[key]) {
-      map[key].push(valueSelector(item));
+    if (dictionary[key]) {
+      dictionary[key].push(valueSelector(item));
     } else {
-      map[key] = [valueSelector(item)];
+      // eslint-disable-next-line no-param-reassign
+      dictionary[key] = [valueSelector(item)];
     }
-    return map;
+    return dictionary;
   }, []);
 
-  return Object.keys(map).map(key => [key, map[key]]);
+  return Object.keys(map).map((key) => [key, map[key]]);
 }
 
 
@@ -608,7 +617,7 @@ function swapHeadAndTail(arr) {
     ...arr.slice(Math.ceil(middle)),
     ...arr.slice(Math.floor(middle), Math.ceil(middle)),
     ...arr.slice(0, Math.floor(middle)),
-  ]
+  ];
 }
 
 

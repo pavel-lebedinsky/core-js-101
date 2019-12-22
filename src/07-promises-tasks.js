@@ -31,7 +31,7 @@
 function willYouMarryMe(isPositiveAnswer) {
   if (isPositiveAnswer === true) {
     return Promise.resolve('Hooray!!! She said "Yes"!');
-  } else if (isPositiveAnswer === false) {
+  } if (isPositiveAnswer === false) {
     return Promise.resolve('Oh no, she said "No".');
   }
 

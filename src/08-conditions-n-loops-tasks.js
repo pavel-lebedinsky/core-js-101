@@ -196,7 +196,7 @@ function findFirstSingleChar(str) {
   }
 
   for (let i = 0; i < str.length; i += 1) {
-    if (chars[str[i]] == 1) return str[i];
+    if (chars[str[i]] === 1) return str[i];
   }
 
   return null;
@@ -285,18 +285,20 @@ function reverseInteger(num) {
  *   4916123456789012 => false
  */
 function isCreditCardNumber(value) {
-  value = String(value).replace(/\D/g, "");
+  let stringValue = String(value).replace(/\D/g, '');
 
-  if (/[^0-9-\s]+/.test(value)) return false;
+  if (/[^0-9-\s]+/.test(stringValue)) return false;
 
   // The Luhn Algorithm. It's so pretty.
-  let nCheck = 0, bEven = false;
-  value = value.replace(/\D/g, "");
+  let nCheck = 0; let
+    bEven = false;
+  stringValue = stringValue.replace(/\D/g, '');
 
-  for (let n = value.length - 1; n >= 0; n--) {
-    var cDigit = value.charAt(n),
-      nDigit = parseInt(cDigit, 10);
+  for (let n = stringValue.length - 1; n >= 0; n -= 1) {
+    const cDigit = stringValue.charAt(n);
+    let nDigit = parseInt(cDigit, 10);
 
+    // eslint-disable-next-line no-cond-assign
     if (bEven && (nDigit *= 2) > 9) nDigit -= 9;
 
     nCheck += nDigit;
@@ -320,8 +322,13 @@ function isCreditCardNumber(value) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  let root = num;
+  do {
+    const digits = String(num).split('').map(parseInt);
+    root = digits.reduce((sum, digit) => sum + digit, 0);
+  } while (root > 9);
+  return root;
 }
 
 

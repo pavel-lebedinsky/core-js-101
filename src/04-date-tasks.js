@@ -55,7 +55,6 @@ function parseDataFromIso8601(value) {
  */
 function isLeapYear(date) {
   const year = date.getFullYear();
-  console.log(year);
   return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
 }
 
@@ -83,6 +82,7 @@ function timeSpanToString(startDate, endDate) {
   difference = Math.round((difference - ss) / 60);
   const mm = difference % 60;
   const HH = Math.round((difference - mm) / 60);
+  // eslint-disable-next-line no-nested-ternary
   return `${HH < 10 ? '0' : ''}${HH}:${mm < 10 ? '0' : ''}${mm}:${ss < 10 ? '0' : ''}${ss}.${sss < 100 ? (sss < 10 ? '00' : '0') : ''}${sss}`;
 }
 
@@ -102,26 +102,20 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-  let h = date.getUTCHours() % 12;
-  let m = date.getUTCMinutes();
+  let hours = date.getUTCHours() % 12;
+  let minutes = date.getUTCMinutes();
 
-  if (h === 12) h = 0;
-  if (m === 60) m = 0;
+  if (hours === 12) hours = 0;
+  if (minutes === 60) minutes = 0;
 
-  // Calculate the angles moved
-  // by hour and minute hands
-  // with reference to 12:00
-  let hour_angle = 0.5 * (h * 60 + m);
-  let minute_angle = 6 * m;
+  const hourAngle = 0.5 * (hours * 60 + minutes);
+  const minuteAngle = 6 * minutes;
 
-  // Find the difference between two angles
-  let angle = Math.abs(hour_angle - minute_angle);
+  let angle = Math.abs(hourAngle - minuteAngle);
 
-  // Return the smaller angle of two possible angles
   angle = Math.min(360 - angle, angle);
 
-  return angle * Math.PI / 180;
-
+  return angle * (Math.PI / 180);
 }
 
 
